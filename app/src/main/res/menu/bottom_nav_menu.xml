@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/llamadasRecientes"
+        android:icon="@drawable/ic_call"
+        android:title="Llamadas Recientes" />
+
+    <item
+        android:id="@+id/contactos"
+        android:icon="@drawable/ic_contact"
+        android:title="Contactos" />
+
+</menu>
