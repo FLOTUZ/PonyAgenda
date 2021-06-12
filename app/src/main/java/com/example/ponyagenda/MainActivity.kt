@@ -8,16 +8,22 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.ponyagenda.data.DAOContacto
 import com.example.ponyagenda.databinding.ActivityMainBinding
 import com.example.ponyagenda.ui.GlobalViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    companion object dbManager {
+        lateinit var daoContacto: DAOContacto
+    }
 
     private val viewModel: GlobalViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        daoContacto = DAOContacto(this, "pony_agenda", null, 1)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
