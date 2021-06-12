@@ -13,5 +13,17 @@
         android:id="@+id/contactos"
         android:name="com.example.ponyagenda.ui.Contactos"
         android:label="contactos_fragment"
-        tools:layout="@layout/contactos_fragment" />
+        tools:layout="@layout/contactos_fragment" >
+        <action
+            android:id="@+id/action_contactos_to_altaContacto"
+            app:destination="@id/altaContacto"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/contactos" />
+    </fragment>
+    <fragment
+        android:id="@+id/altaContacto"
+        android:name="com.example.ponyagenda.AltaContacto"
+        android:label="alta_contacto_fragment"
+        tools:layout="@layout/alta_contacto_fragment" />
 </navigation>

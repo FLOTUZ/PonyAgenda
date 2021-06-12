@@ -14,7 +14,7 @@ import com.example.ponyagenda.ui.GlobalViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    companion object dbManager {
+    companion object {
         lateinit var daoContacto: DAOContacto
     }
 

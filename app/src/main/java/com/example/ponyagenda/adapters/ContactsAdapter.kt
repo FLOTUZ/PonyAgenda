@@ -30,7 +30,12 @@ class ContactsAdapter(val context: Context, val layout: Int, val lista: ArrayLis
 
         val img = miView.findViewById<ImageView>(R.id.imgContactItem)
         val nombre = miView.findViewById<TextView>(R.id.nombreContactItem)
-        val puesto = miView.findViewById<TextView>(R.id.puestoContactItem)
+        val numero = miView.findViewById<TextView>(R.id.numeroContactoItem)
+        val email = miView.findViewById<TextView>(R.id.emailContactoItem)
+
+        nombre.text = lista[position].name
+        numero.text = lista[position].phone
+        email.text = lista[position].email
 
         return miView
     }

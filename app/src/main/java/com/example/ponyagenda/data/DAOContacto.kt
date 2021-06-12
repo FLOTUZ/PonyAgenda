@@ -31,7 +31,7 @@ class DAOContacto(
         val db = writableDatabase
 
         val sql =
-            "INSERT INTO contacto(nombre, telefono, email ) VALUES('${contactItem.name}, ${contactItem.phone}, ${contactItem.email}')"
+            "INSERT INTO contacto(nombre, telefono, email ) VALUES('${contactItem.name}', '${contactItem.phone}', '${contactItem.email}')"
 
         db.execSQL(sql)
 

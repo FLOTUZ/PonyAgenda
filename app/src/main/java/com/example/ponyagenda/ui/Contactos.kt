@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.ponyagenda.MainActivity
 import com.example.ponyagenda.R
 import com.example.ponyagenda.adapters.ContactsAdapter
 import com.example.ponyagenda.databinding.ContactosFragmentBinding
 import com.example.ponyagenda.models.ContactItem
+import java.lang.Exception
 
 class Contactos : Fragment() {
 
@@ -32,10 +35,16 @@ class Contactos : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val arr = ArrayList<ContactItem>()
-        arr.add(ContactItem(1,"Emmanuel","flotuz10@gmail.com", "4433110399"))
+        if(MainActivity.daoContacto.consultaContactos().size != 0){
+            val arr = MainActivity.daoContacto.consultaContactos()
+            binding.lvContacts.adapter = ContactsAdapter(view.context, R.layout.contacto_item, arr)
+        }else{
+            binding.lvlListaVacia.visibility = View.VISIBLE
+        }
 
-        binding.lvContacts.adapter = ContactsAdapter(view.context, R.layout.contacto_item, arr)
+        binding.fabAddUser.setOnClickListener {
+            findNavController().navigate(R.id.action_contactos_to_altaContacto)
+        }
     }
 
     fun String.toast() {
