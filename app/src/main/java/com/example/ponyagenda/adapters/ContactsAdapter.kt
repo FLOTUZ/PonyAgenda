@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import com.example.ponyagenda.R
 import com.example.ponyagenda.models.ContactItem
 
@@ -29,6 +31,8 @@ class ContactsAdapter(val context: Context, val layout: Int, val lista: ArrayLis
         val miView = inflater.inflate(layout, null)
 
         val img = miView.findViewById<ImageView>(R.id.imgContactItem)
+        val card = miView.findViewById<CardView>(R.id.cardContactItem)
+        val layActions = miView.findViewById<LinearLayout>(R.id.layActions)
         val nombre = miView.findViewById<TextView>(R.id.nombreContactItem)
         val numero = miView.findViewById<TextView>(R.id.numeroContactoItem)
         val email = miView.findViewById<TextView>(R.id.emailContactoItem)
@@ -36,6 +40,10 @@ class ContactsAdapter(val context: Context, val layout: Int, val lista: ArrayLis
         nombre.text = lista[position].name
         numero.text = lista[position].phone
         email.text = lista[position].email
+
+        card.setOnClickListener {
+            layActions.translationY = (70.0).toFloat()
+        }
 
         return miView
     }
