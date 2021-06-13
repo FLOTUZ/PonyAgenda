@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/llamadasRecientes">
+    app:startDestination="@id/contactos">
     <fragment
         android:id="@+id/llamadasRecientes"
         android:name="com.example.ponyagenda.ui.LlamadasRecientes"
-        android:label="llamadas_recientes_fragment"
+        android:label="Llamadas recientes"
         tools:layout="@layout/llamadas_recientes_fragment" />
     <fragment
         android:id="@+id/contactos"
         android:name="com.example.ponyagenda.ui.Contactos"
-        android:label="contactos_fragment"
+        android:label="Tus Contactos"
         tools:layout="@layout/contactos_fragment" >
         <action
             android:id="@+id/action_contactos_to_altaContacto"
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/altaContacto"
-        android:name="com.example.ponyagenda.AltaContacto"
-        android:label="alta_contacto_fragment"
+        android:name="com.example.ponyagenda.ui.AltaContacto"
+        android:label="Nuevo Contacto"
         tools:layout="@layout/alta_contacto_fragment" />
 </navigation>

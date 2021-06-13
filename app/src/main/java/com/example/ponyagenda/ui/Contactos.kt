@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.ponyagenda.MainActivity
 import com.example.ponyagenda.R
@@ -35,10 +36,13 @@ class Contactos : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(MainActivity.daoContacto.consultaContactos().size != 0){
-            val arr = MainActivity.daoContacto.consultaContactos()
-            binding.lvContacts.adapter = ContactsAdapter(view.context, R.layout.contacto_item, arr)
-        }else{
+        if (MainActivity.daoContacto.consultaContactos().size != 0) {
+            viewModel.setListaContactos(MainActivity.daoContacto.consultaContactos())
+            viewModel.getListaContactos.observe(viewLifecycleOwner, Observer {
+                binding.lvContacts.adapter =
+                    ContactsAdapter(view.context, R.layout.contacto_item, it)
+            })
+        } else {
             binding.lvlListaVacia.visibility = View.VISIBLE
         }
 
