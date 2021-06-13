@@ -47,7 +47,7 @@ class EditarContacto : Fragment() {
             val telefono = binding.telefonoEditContacto.text.toString()
             val email = binding.emailEditContacto.text.toString()
 
-            if (nombre != null && telefono != null && email != null) {
+            if (nombre != "" && telefono != "" && email != "") {
                 viewModel.getContacto.observe(viewLifecycleOwner, Observer {
                     val viejo = it
                     val nuevo = ContactItem(0, nombre, email, telefono)

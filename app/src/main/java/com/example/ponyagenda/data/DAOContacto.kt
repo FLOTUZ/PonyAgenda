@@ -61,7 +61,7 @@ class DAOContacto(
     fun consultaContactos(): ArrayList<ContactItem> {
         val db = readableDatabase
 
-        val sql = "SELECT * FROM contacto"
+        val sql = "SELECT id, nombre, telefono, email FROM contacto"
 
         val cursor = db.rawQuery(sql, null)
 
@@ -97,7 +97,7 @@ class DAOContacto(
     fun borrarContacto(contactItem: ContactItem) {
         val db = writableDatabase
 
-        val sql = "DELETE FROM productos WHERE id=${contactItem.id}"
+        val sql = "DELETE FROM contacto WHERE id=${contactItem.id}"
 
         db.execSQL(sql)
 

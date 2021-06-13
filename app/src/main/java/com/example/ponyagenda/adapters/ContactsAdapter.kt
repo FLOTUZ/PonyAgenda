@@ -9,7 +9,11 @@ import androidx.cardview.widget.CardView
 import com.example.ponyagenda.R
 import com.example.ponyagenda.models.ContactItem
 
-abstract class ContactsAdapter(val context: Context, val layout: Int, val lista: ArrayList<ContactItem>) :
+abstract class ContactsAdapter(
+    val context: Context,
+    val layout: Int,
+    val lista: ArrayList<ContactItem>
+) :
     BaseAdapter() {
     override fun getCount(): Int {
         return lista.size
@@ -39,6 +43,7 @@ abstract class ContactsAdapter(val context: Context, val layout: Int, val lista:
         val btnCall = miView.findViewById<Button>(R.id.toggleCall)
         val btnEdit = miView.findViewById<Button>(R.id.toggleEdit)
         val btnDelete = miView.findViewById<Button>(R.id.toggleDelete)
+        val btnMail = miView.findViewById<Button>(R.id.toggleMail)
 
         nombre.text = lista[position].name
         numero.text = lista[position].phone
@@ -49,20 +54,42 @@ abstract class ContactsAdapter(val context: Context, val layout: Int, val lista:
         //Se setea el estado por defecto, del layout de acciones
         layActions.visibility = View.INVISIBLE
         card.setOnClickListener {
-            if (visible){
+            if (visible) {
                 layActions.visibility = View.INVISIBLE
                 visible = false
-            }else{
+            } else {
                 layActions.visibility = View.VISIBLE
-                visible =true
+                visible = true
             }
         }
 
+        //------- Mensaje SMS ---------
+        btnMsg.setOnClickListener {
+            smsAcontacto(lista[position])
+        }
+        //------- LLamae ---------
+        btnCall.setOnClickListener {
+            llamarContacto(lista[position])
+        }
+        //------- Editar ---------
         btnEdit.setOnClickListener {
-            setContacto(lista[position])
+            editContacto(lista[position])
+        }
+        //------- Eliminar ---------
+        btnDelete.setOnClickListener {
+            deleteContacto(lista[position])
+        }
+        //------- Email ---------
+        btnMail.setOnClickListener {
+            sendMail(lista[position])
         }
 
         return miView
     }
-    abstract fun setContacto(contactItem: ContactItem)
+
+    abstract fun smsAcontacto(contactItem: ContactItem)
+    abstract fun llamarContacto(contactItem: ContactItem)
+    abstract fun editContacto(contactItem: ContactItem)
+    abstract fun deleteContacto(contactItem: ContactItem)
+    abstract fun sendMail(contactItem: ContactItem)
 }

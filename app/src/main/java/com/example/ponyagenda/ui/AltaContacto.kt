@@ -38,10 +38,11 @@ class AltaContacto : Fragment() {
             val email = binding.emailAddContacto.text.toString()
 
             //Alta de contacto
-            if (nombre != null && telefono != null && email != null) {
-                val contacto = ContactItem(0, nombre, email, telefono)
+            if (nombre.isNotEmpty() && telefono.isNotEmpty() && email.isNotEmpty()) {
+                val contacto = ContactItem(0, nombre, telefono, email)
                 MainActivity.daoContacto.altaContacto(contacto)
                 "Contacto agregado con exito!".toast()
+                activity?.onBackPressed();
             } else {
                 "Verifique que los datos estan completos".toast()
             }

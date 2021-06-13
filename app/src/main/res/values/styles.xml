@@ -35,6 +35,18 @@
         <item name="android:minHeight">48dp</item>
     </style>
 
+    <style name="icongray" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="iconTint">#8A8A8A</item>
+        <item name="cornerRadius">50dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
     <style name="icongreen" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="cornerRadius">50dp</item>
         <item name="iconTint">#00804C</item>
