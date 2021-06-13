@@ -39,8 +39,14 @@ class Contactos : Fragment() {
         if (MainActivity.daoContacto.consultaContactos().size != 0) {
             viewModel.setListaContactos(MainActivity.daoContacto.consultaContactos())
             viewModel.getListaContactos.observe(viewLifecycleOwner, Observer {
-                binding.lvContacts.adapter =
-                    ContactsAdapter(view.context, R.layout.contacto_item, it)
+                binding.lvContacts.adapter = object :
+                    ContactsAdapter(view.context, R.layout.contacto_item, it){
+                    override fun setContacto(contactItem: ContactItem) {
+                        viewModel.setContactoSeleccionado(contactItem)
+                        findNavController().navigate(R.id.action_contactos_to_editarContacto)
+                    }
+
+                }
             })
         } else {
             binding.lvlListaVacia.visibility = View.VISIBLE

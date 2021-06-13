@@ -20,10 +20,23 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/contactos" />
+        <action
+            android:id="@+id/action_contactos_to_editarContacto"
+            app:destination="@id/editarContacto" />
     </fragment>
     <fragment
         android:id="@+id/altaContacto"
         android:name="com.example.ponyagenda.ui.AltaContacto"
         android:label="Nuevo Contacto"
         tools:layout="@layout/alta_contacto_fragment" />
+    <fragment
+        android:id="@+id/editarContacto"
+        android:name="com.example.ponyagenda.EditarContacto"
+        android:label="Editar Contacto"
+        tools:layout="@layout/editar_contacto_fragment" >
+        <action
+            android:id="@+id/action_editarContacto_to_contactos"
+            app:destination="@id/contactos"
+            app:popUpTo="@id/contactos" />
+    </fragment>
 </navigation>

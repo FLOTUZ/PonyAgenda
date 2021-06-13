@@ -86,7 +86,7 @@ class DAOContacto(
         val db = writableDatabase
 
         val sql =
-            "UPDATE contactos SET nombre='${nuevo.name}', telefono='${nuevo.phone}',email='${nuevo.email}' WHERE id=${viejo.id}"
+            "UPDATE contacto SET nombre='${nuevo.name}', telefono='${nuevo.phone}',email='${nuevo.email}' WHERE id=${viejo.id}"
 
         db.execSQL(sql)
 

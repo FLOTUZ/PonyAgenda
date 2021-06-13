@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.AltaContacto">
+    tools:context=".EditarContacto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:padding="30dp">
 
         <ImageView
-            android:id="@+id/imgAddContacto"
+            android:id="@+id/imgEditContacto"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             tools:src="@mipmap/ic_launcher" />
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nombreAddContacto"
+                android:id="@+id/nombreEditContacto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="30dp"
@@ -44,7 +44,7 @@
                 android:text="Telefono" />
 
             <EditText
-                android:id="@+id/telefonoAddContacto"
+                android:id="@+id/telefonoEditContacto"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:ems="10"
@@ -66,7 +66,7 @@
                 android:text="email" />
 
             <EditText
-                android:id="@+id/emailAddContacto"
+                android:id="@+id/emailEditContacto"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:ems="10"
@@ -80,27 +80,27 @@
             android:orientation="horizontal">
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/btnGuardar"
+                android:id="@+id/btnGuardarEditContacto"
+                app:icon="@drawable/ic_baseline_check_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="15dp"
                 android:layout_marginTop="30dp"
-                android:text="Agregar"
-                app:icon="@android:drawable/ic_menu_add" />
+                android:text="Guardar" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/btnDescartar"
+                android:id="@+id/btnCancelarEditContacto"
+                app:backgroundTint="@android:color/holo_red_dark"
+                app:icon="@drawable/ic_baseline_not_interested_24"
+                app:iconTint="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="15dp"
                 android:layout_marginTop="30dp"
-                android:text="Descartar"
-                android:textColor="@color/white"
-                app:backgroundTint="@android:color/holo_red_dark"
-                app:icon="@android:drawable/ic_menu_add"
-                app:iconTint="@color/white" />
+                android:text="cancelar"
+                android:textColor="@color/white" />
         </LinearLayout>
 
 

@@ -4,15 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.cardview.widget.CardView
 import com.example.ponyagenda.R
 import com.example.ponyagenda.models.ContactItem
 
-class ContactsAdapter(val context: Context, val layout: Int, val lista: ArrayList<ContactItem>) :
+abstract class ContactsAdapter(val context: Context, val layout: Int, val lista: ArrayList<ContactItem>) :
     BaseAdapter() {
     override fun getCount(): Int {
         return lista.size
@@ -37,6 +34,12 @@ class ContactsAdapter(val context: Context, val layout: Int, val lista: ArrayLis
         val numero = miView.findViewById<TextView>(R.id.numeroContactoItem)
         val email = miView.findViewById<TextView>(R.id.emailContactoItem)
 
+        //-----------------Botones--------------------
+        val btnMsg = miView.findViewById<Button>(R.id.toogleMSG)
+        val btnCall = miView.findViewById<Button>(R.id.toggleCall)
+        val btnEdit = miView.findViewById<Button>(R.id.toggleEdit)
+        val btnDelete = miView.findViewById<Button>(R.id.toggleDelete)
+
         nombre.text = lista[position].name
         numero.text = lista[position].phone
         email.text = lista[position].email
@@ -55,6 +58,11 @@ class ContactsAdapter(val context: Context, val layout: Int, val lista: ArrayLis
             }
         }
 
+        btnEdit.setOnClickListener {
+            setContacto(lista[position])
+        }
+
         return miView
     }
+    abstract fun setContacto(contactItem: ContactItem)
 }
