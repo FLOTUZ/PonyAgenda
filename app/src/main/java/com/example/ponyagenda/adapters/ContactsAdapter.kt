@@ -41,8 +41,18 @@ class ContactsAdapter(val context: Context, val layout: Int, val lista: ArrayLis
         numero.text = lista[position].phone
         email.text = lista[position].email
 
+        //Para controlar el IF
+        var visible = false
+        //Se setea el estado por defecto, del layout de acciones
+        layActions.visibility = View.INVISIBLE
         card.setOnClickListener {
-            layActions.translationY = (70.0).toFloat()
+            if (visible){
+                layActions.visibility = View.INVISIBLE
+                visible = false
+            }else{
+                layActions.visibility = View.VISIBLE
+                visible =true
+            }
         }
 
         return miView
