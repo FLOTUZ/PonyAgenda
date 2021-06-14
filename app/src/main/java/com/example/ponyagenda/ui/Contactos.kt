@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -41,42 +42,7 @@ class Contactos : Fragment() {
         if (MainActivity.daoContacto.consultaContactos().size != 0) {
             viewModel.setListaContactos(MainActivity.daoContacto.consultaContactos())
             viewModel.getListaContactos.observe(viewLifecycleOwner, Observer {
-                binding.lvContacts.adapter = object :
-                    ContactsAdapter(view.context, R.layout.contacto_item, it) {
-                    override fun smsAcontacto(contactItem: ContactItem) {
-                        val num: String = String.format("smsto:${contactItem.phone}")
-                        val smsIntent = Intent(Intent.ACTION_SENDTO)
-                        smsIntent.data = Uri.parse(num)
-                        ContextCompat.startActivity(context, smsIntent, null)
-                    }
-
-                    override fun llamarContacto(contactItem: ContactItem) {
-                        val tel: String = String.format("tel: ${contactItem.phone}")
-                        val call = Intent(Intent.ACTION_DIAL)
-                        call.data = Uri.parse(tel)
-                        ContextCompat.startActivity(context, call, null)
-                    }
-
-                    override fun editContacto(contactItem: ContactItem) {
-                        viewModel.setContactoSeleccionado(contactItem)
-                        findNavController().navigate(R.id.action_contactos_to_editarContacto)
-                    }
-
-                    override fun deleteContacto(contactItem: ContactItem) {
-                        MainActivity.daoContacto.borrarContacto(contactItem)
-                        viewModel.setListaContactos(it)
-                        onViewCreated(view, savedInstanceState)
-                    }
-
-                    override fun sendMail(contactItem: ContactItem) {
-                        val intent = Intent(Intent.ACTION_VIEW)
-                        val data =
-                            Uri.parse("mailto:${contactItem.email}?subject=Mensaje de ${contactItem.name}")
-                        intent.data = data
-                        startActivity(intent)
-                    }
-
-                }
+                actualizarLista(view, it)
             })
         } else {
             binding.lvlListaVacia.visibility = View.VISIBLE
@@ -85,6 +51,59 @@ class Contactos : Fragment() {
         binding.fabAddUser.setOnClickListener {
             findNavController().navigate(R.id.action_contactos_to_altaContacto)
         }
+
+        binding.serchBar.doOnTextChanged { text, start, before, count ->
+            viewModel.getListaContactos.observe(viewLifecycleOwner, Observer {
+                val listaFiltrada = it.filter {
+                    it.name.contains(text.toString(), ignoreCase = true) ||
+                            it.phone.contains(text.toString(), ignoreCase = true) ||
+                            it.email.contains(text.toString(), ignoreCase = true)
+                }
+                println(listaFiltrada)
+                actualizarLista(view, listaFiltrada as ArrayList<ContactItem>)
+            })
+        }
+    }
+
+    private fun actualizarLista(view: View, list: ArrayList<ContactItem>) {
+
+        binding.lvContacts.adapter = object :
+            ContactsAdapter(view.context, R.layout.contacto_item, list) {
+            override fun smsAcontacto(contactItem: ContactItem) {
+                val num: String = String.format("smsto:${contactItem.phone}")
+                val smsIntent = Intent(Intent.ACTION_SENDTO)
+                smsIntent.data = Uri.parse(num)
+                ContextCompat.startActivity(context, smsIntent, null)
+            }
+
+            override fun llamarContacto(contactItem: ContactItem) {
+                val tel: String = String.format("tel: ${contactItem.phone}")
+                val call = Intent(Intent.ACTION_DIAL)
+                call.data = Uri.parse(tel)
+                ContextCompat.startActivity(context, call, null)
+            }
+
+            override fun editContacto(contactItem: ContactItem) {
+                viewModel.setContactoSeleccionado(contactItem)
+                findNavController().navigate(R.id.action_contactos_to_editarContacto)
+            }
+
+            override fun deleteContacto(contactItem: ContactItem) {
+                MainActivity.daoContacto.borrarContacto(contactItem)
+                viewModel.setListaContactos(list)
+                actualizarLista(view, list)
+            }
+
+            override fun sendMail(contactItem: ContactItem) {
+                val intent = Intent(Intent.ACTION_VIEW)
+                val data =
+                    Uri.parse("mailto:${contactItem.email}?subject=Mensaje de ${contactItem.name}")
+                intent.data = data
+                startActivity(intent)
+            }
+
+        }
+
     }
 
     fun String.toast() {
