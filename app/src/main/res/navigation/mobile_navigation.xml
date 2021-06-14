@@ -31,7 +31,7 @@
         tools:layout="@layout/alta_contacto_fragment" />
     <fragment
         android:id="@+id/editarContacto"
-        android:name="com.example.ponyagenda.EditarContacto"
+        android:name="com.example.ponyagenda.ui.EditarContacto"
         android:label="Editar Contacto"
         tools:layout="@layout/editar_contacto_fragment" >
         <action

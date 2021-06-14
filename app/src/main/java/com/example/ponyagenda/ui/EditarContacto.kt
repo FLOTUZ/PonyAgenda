@@ -1,4 +1,4 @@
-package com.example.ponyagenda
+package com.example.ponyagenda.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.ponyagenda.MainActivity
+import com.example.ponyagenda.R
 import com.example.ponyagenda.databinding.EditarContactoFragmentBinding
 import com.example.ponyagenda.models.ContactItem
-import com.example.ponyagenda.ui.GlobalViewModel
 import java.lang.Exception
 
 class EditarContacto : Fragment() {
